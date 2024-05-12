@@ -1,14 +1,42 @@
 'use client'
 
 import React from 'react';
-import { useAuthStore } from '../../../../store';
-import { useState } from 'react';
+import { useAuthStore } from '../../../../stores/auth/store';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { toast } from 'react-toastify';
+
+import { redirect } from 'next/navigation';
 
 
 const page = () => {
-  const { login } = useAuthStore()
+  const auth = useAuthStore((state) => state)
+  const login = useAuthStore((state) => state.login)
+
+  useEffect(() => {
+    if (auth.name) {
+      let name = auth.name
+      name = name.split(' ')[0]
+
+      toast.success(`Welcome ${name}!`);
+
+      console.log(auth.role)
+
+      if(auth.role === 'help_desk'){
+        redirect('/help-desk/faults')
+      }
+
+      if (auth.role === 'technician'){
+        redirect('/technician/dashboard/assigned-faults')
+      }
+
+      if (auth.role === 'customer'){
+        redirect('/customer/dashboard')
+      }
+
+    }
+  }, [auth.name])
 
   // Define variables input variables
   const [email, setEmail] = useState('')
@@ -16,11 +44,38 @@ const page = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    // const res = await axios.post()
+    if (!email || !password) return;
 
-    console.log(email)
-    console.log(password)
-    console.log('logging in...')
+    const auth_data = {
+      email : email,
+      password: password
+    }
+
+    // Make api call
+    const authResponse = axios.post('https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/auth/login', 
+      {
+        ...auth_data
+      }
+    ).then((response) => {
+      const updated_res = response.data.user_information[0]
+      const authToken = response.data.user_information.authToken
+
+      // configure payload
+      const payload = {
+        id: updated_res.id,
+        name: updated_res.name,
+        email: updated_res.email,
+        role: updated_res.role,
+        authToken: authToken
+      }
+
+      // use login hook and Update global state with variables fron successful auth
+      login(payload)
+
+    }).catch((err) => {
+      toast.error(err.response?.data?.message)
+    })
+
   }
 
 

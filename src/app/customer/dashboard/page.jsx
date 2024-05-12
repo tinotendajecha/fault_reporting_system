@@ -38,17 +38,17 @@ const page = () => {
             <UserIcon className="mr-1.5 h-16 w-16 flex-shrink-0 text-gray-400 border" />
             <div className="ml-2 ">
               <h1 className="text-2xl">Tino</h1>
-              <p>Software Engineer</p>
+              <p>Customer</p>
             </div>
           </div>
 
           <div className="flex flex-col ml-2 mt-5 ">
-            <Link href="/user/dashboard">
-              <div className="text-xl  p-3 w-56 bg-gray-200">My Faults</div>
+            <Link href="/customer/dashboard">
+              <div className="text-xl  p-3 w-56 bg-gray-200">Open Tickets</div>
             </Link>
 
-            <Link href="/user/jobs">
-              <div className="text-xl p-3">Job Assignments</div>
+            <Link href="/customer/closed-tickets">
+              <div className="text-xl p-3">Ticket History</div>
             </Link>
           </div>
         </div>
@@ -62,6 +62,9 @@ const page = () => {
           </div>
 
           <div className="mt-4 ">
+            <div className='flex items-center justify-end mb-2'>
+             <Link href='/customer/report-fault'> <button className='bg-black p-1.5 rounded-lg text-white'>Report Fault</button></Link>
+            </div>
             <Table>
               <TableCaption>List of reported faults</TableCaption>
               <TableHeader>
@@ -84,16 +87,14 @@ const page = () => {
                     <TableCell className="text-left">{fault.status}</TableCell>
                     <TableCell className="">
                       <div className="flex gap-0.5">
-                        <Link href='/help-desk/faults/assign-worker'>
+                        <Link href='/customer/edit-ticket'>
                           <button className="bg-black text-white p-1 rounded">
                             Edit
                           </button>
                         </Link>
-                        <Link href='/help-desk/faults/delete-fault'>
                           <button className="bg-black text-white p-1 rounded">
                             Delete
                           </button>
-                        </Link>
                       </div>
                     </TableCell>
                   </TableRow>

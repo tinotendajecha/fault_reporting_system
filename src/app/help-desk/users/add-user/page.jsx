@@ -1,0 +1,138 @@
+'use client'
+import React from "react";
+import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { Btn } from "@/components/Btn";
+import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-toastify";
+
+const page = () => {
+
+  // Bind input fields to variables
+  const [email, setEmail] = useState('')
+  const [fullName, setFullName] = useState('')
+  const [password, setPassword] = useState('')
+  const [role, setRole] = useState('')
+
+  
+
+  const handleCreateAccountForUser = (e) => {
+    e.preventDefault()
+
+    if(!role){
+      toast.error('Please assign role!')
+    }
+    if(!email || !fullName || !password){
+      toast.error('Fill in all fields!')
+    }
+
+    const formData = {
+      email, fullName, password, role
+    }
+
+    // API call - POST Request
+    console.log(formData)
+  }
+  return (
+    <>
+      <form>
+        <div>
+          <h1>Add User</h1>
+        </div>
+
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Email
+          </label>
+          <div className="mt-2">
+            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+              <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                onChange={(e) => {setEmail(e.target.value)}}
+                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                placeholder="johndoe@gmail.com"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Full Name
+          </label>
+          <div className="mt-2">
+            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+              <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                autoComplete="name"
+                required
+                onChange={(e) => {setFullName(e.target.value)}}
+                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                placeholder="John Doe"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Password
+          </label>
+          <div className="mt-2">
+            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+              <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Assign default password for user"
+                autoComplete="password"
+                onChange={(e) => {setPassword(e.target.value)}}
+                required
+                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label
+            htmlFor="role"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Role and Permissions
+          </label>
+          <select name="role" id="role" onChange={(e) => {setRole(e.target.value)}}>
+            <option value="">Assign role</option>
+            <option value="help_desk">Help Desk Agent</option>
+            <option value="technician">Technician</option>
+            <option value="customer">Customer</option>
+          </select>
+        </div>
+
+        <div>
+          <button className="bg-black text-white p-1.5 rounded-lg mt-2"
+          onClick={handleCreateAccountForUser}
+          >Create Account</button>
+        </div>
+      </form>
+    </>
+  );
+};
+
+export default page;

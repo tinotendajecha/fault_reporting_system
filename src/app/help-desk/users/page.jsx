@@ -14,25 +14,25 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const workers = [
+const users = [
   {
     id: 1,
     name: "Tinotenda J",
     expertise: "Software Developer",
-    worker_role: "Technician"
+    user_role: "Technician"
   },
 
   {
     id: 2,
     name: "John Doe",
     expertise: "Hardware Engineer",
-    worker_role: "User"
+    user_role: "User"
   },
   {
     id: 3,
     name: "Jane Doe",
     expertise: "Help Desk",
-    worker_role: "Help Desk"
+    user_role: "Help Desk"
   }
 ];
 
@@ -55,11 +55,11 @@ const page = () => {
             </Link>
 
             <Link href="/help-desk/jobs">
-              <div className="text-xl p-3 ">Jobs</div>
+              <div className="text-xl p-3 w-56 ">Jobs</div>
             </Link>
 
-            <Link href="/help-desk/workers">
-              <div className="text-xl p-3 bg-gray-200">Workers</div>
+            <Link href="/help-desk/users">
+              <div className="text-xl p-3 bg-gray-200">Users</div>
             </Link>
           </div>
         </div>
@@ -74,7 +74,7 @@ const page = () => {
             </div>
 
             <div className="mr-16 bg-green-600 text-white p-1.5 rounded">
-             <Link href='/help-desk/workers/add-worker'> <button>Add Worker</button></Link>
+             <Link href='/help-desk/users/add-user'> <button>Add User</button></Link>
             </div>
           </div>
 
@@ -84,7 +84,7 @@ const page = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead className="text-left w-[200px]">
-                    Worker Name
+                    user Name
                   </TableHead>
                   <TableHead className="text-left w-[200px]">
                     Expertise
@@ -98,16 +98,16 @@ const page = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {workers.map((worker) => (
-                  <TableRow key={worker.id}>
+                {users.map((user) => (
+                  <TableRow key={user.id}>
                     <TableCell className="font-medium text-left">
-                      {worker.name}
+                      {user.name}
                     </TableCell>
-                    <TableCell>{worker.expertise}</TableCell>
-                    <TableCell>{worker.worker_role}</TableCell>
+                    <TableCell>{user.expertise}</TableCell>
+                    <TableCell>{user.user_role}</TableCell>
                     <TableCell className="text-left">
                       <div className="flex items-center gap-0.5">
-                        <Link href='/help-desk/workers/edit-worker'>
+                        <Link href='/help-desk/users/edit-user'>
                           <button className="bg-black text-white p-1 rounded">
                             Edit
                           </button>

@@ -2,9 +2,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>
-        User Jobs
-    </div>
+    <div>Update fault...</div>
   )
 }
 

@@ -21,7 +21,7 @@ const jobs = [
     job_number: "1",
     description: "Fix Cafe coffee machine",
     customer: "Cafe People",
-    worker: "John Doe",
+    user: "John Doe",
     status: "pending",
     comments: "Machine is not turning on. Needs to be fixed ASAP.",
   },
@@ -31,7 +31,7 @@ const jobs = [
     job_number: "2",
     description: "Fix Office wifi",
     customer: "Office people",
-    worker: "Jane Doe",
+    user: "Jane Doe",
     status: "In Progress",
     comments: "Wifi is not working. Needs to be fixed ASAP.",
   },
@@ -41,7 +41,7 @@ const jobs = [
     job_number: "3",
     description: "Fix Office wifi",
     customer: "Office people",
-    worker: "Jane Doe",
+    user: "Jane Doe",
     status: "In Progress",
     comments: "Wifi is not working. Needs to be fixed ASAP.",
   },
@@ -66,11 +66,11 @@ const page = () => {
             </Link>
 
             <Link href="/help-desk/jobs">
-              <div className="text-xl p-3 bg-gray-200">Jobs</div>
+              <div className="text-xl p-3 w-56 bg-gray-200">Jobs</div>
             </Link>
 
-            <Link href="/help-desk/workers">
-              <div className="text-xl p-3">Workers</div>
+            <Link href="/help-desk/users">
+              <div className="text-xl p-3">users</div>
             </Link>
           </div>
         </div>
@@ -106,7 +106,7 @@ const page = () => {
                   <TableHead className="text-left w-[200px]">
                     Customer
                   </TableHead>
-                  <TableHead className="text-left w-[200px]">worker</TableHead>
+                  <TableHead className="text-left w-[200px]">user</TableHead>
                   <TableHead className="text-left w-[200px]">Status</TableHead>
                   <TableHead className="text-left w-[200px]">
                     Comments
@@ -127,7 +127,7 @@ const page = () => {
                       {job.description}
                     </TableCell>
                     <TableCell className="text-left">{job.customer}</TableCell>
-                    <TableCell className="text-left">{job.worker}</TableCell>
+                    <TableCell className="text-left">{job.user}</TableCell>
                     <TableCell className="text-left">{job.status}</TableCell>
                     <TableCell className="text-left">{job.comments}</TableCell>
                     <TableCell className="text-center">
