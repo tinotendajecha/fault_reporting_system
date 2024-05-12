@@ -70,7 +70,7 @@ const page = () => {
             </Link>
 
             <Link href="/help-desk/users">
-              <div className="text-xl p-3">users</div>
+              <div className="text-xl p-3">Users</div>
             </Link>
           </div>
         </div>
