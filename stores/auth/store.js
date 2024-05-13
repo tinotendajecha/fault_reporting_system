@@ -24,5 +24,6 @@ export const useAuthStore = create((set) => ({
         }))
 
         return true
-    }
+    },
+    logout: () => set({auth: initialAuthStore})
 }))
