@@ -52,7 +52,7 @@ const page = () => {
     }
 
     // Make api call
-    const authResponse = axios.post('https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/auth/login', 
+    const api_call = axios.post('https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/auth/login', 
       {
         ...auth_data
       }

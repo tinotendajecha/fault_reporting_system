@@ -1,6 +1,11 @@
-import React from 'react';
+"use client";
+import React, { useState } from "react";
 import { UserIcon } from "@heroicons/react/20/solid";
-import Link from 'next/link';
+import Link from "next/link";
+import { useAuthStore } from "../../../../stores/auth/store";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
+import ReactLoading from "react-loading";
 
 import {
   Table,
@@ -12,26 +17,48 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const faults = [
-  {
-    id: 1,
-    description: "Office wifi not working",
-    location: "IT Department",
-    status: "pending",
-  },
-  {
-    id: 1,
-    description: "Office printer not working",
-    location: "Office",
-    status: "In Progress",
-  },
-];
-
+import axios from "axios";
 
 const page = () => {
+  const auth = useAuthStore((state) => state);
+  const [customerFaults, setCustomerFaults] = useState([]);
+  const [isloading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getAllCustomerFaults();
+  }, []);
+
+  const getAllCustomerFaults = async (e) => {
+    const customer_id = auth.id;
+
+    const api_call = await axios
+      .get(
+        `https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/getCustomerFaults?customer_id=${customer_id}`
+      )
+      .then((res) => {
+        setCustomerFaults(res.data);
+
+        // set loading to false
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        toast.error(err.response?.data?.message);
+      });
+  };
+
+  if (isloading) {
+    return (
+      <>
+        <div className="flex justify-center items-center min-h-96">
+          <ReactLoading type="spin" color="gray" height={"4%"} width={"4%"} />
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
+      {console.log(customerFaults[0])}
       <div className="columns flex ml-10">
         <div className="mt-10 flex items-start justify-between flex-col  pl-1 pr-2 h-48 lg:w-64">
           <div className="flex items-center ml-2 mt-2 ">
@@ -62,39 +89,60 @@ const page = () => {
           </div>
 
           <div className="mt-4 ">
-            <div className='flex items-center justify-end mb-2'>
-             <Link href='/customer/report-fault'> <button className='bg-black p-1.5 rounded-lg text-white'>Report Fault</button></Link>
+            <div className="flex items-center justify-end mb-2">
+              <Link href="/customer/report-fault">
+                {" "}
+                <button className="bg-black p-1.5 rounded-lg text-white">
+                  Report Fault
+                </button>
+              </Link>
             </div>
             <Table>
               <TableCaption>List of reported faults</TableCaption>
               <TableHeader>
                 <TableRow>
+                  <TableHead className="w-[200px]">Fault Name</TableHead>
                   <TableHead className="w-[200px]">Description</TableHead>
-                  <TableHead className="w-[200px]">Location</TableHead>
                   <TableHead className="text-left w-[200px]">Status</TableHead>
                   <TableHead className="text-left w-[200px]">
-                    Action
+                    Progress Notes
                   </TableHead>
+                  <TableHead className="text-left w-[200px]">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {faults.map((fault) => (
+                {customerFaults.map((fault) => (
                   <TableRow key={fault.id}>
-                    <TableCell className="font-medium">
-                      {fault.description}
+                    <TableCell>{fault.fault_name}</TableCell>
+                    <TableCell>{fault.description}</TableCell>
+                    <TableCell>
+                      <span
+                        className={`${
+                          fault.status === "new"
+                            ? "text-blue-500"
+                            : fault.status === "resolved"
+                            ? "text-green-500"
+                            : "text-black"
+                        }`}
+                      >
+                        {fault.status}
+                      </span>
                     </TableCell>
-                    <TableCell>{fault.location}</TableCell>
-                    <TableCell className="text-left">{fault.status}</TableCell>
+                    <TableCell>
+                      {!fault.progress_notes
+                        ? "None Yet Check Later"
+                        : fault.progress_notes}
+                    </TableCell>
                     <TableCell className="">
                       <div className="flex gap-0.5">
-                        <Link href='/customer/edit-ticket'>
+                        <Link href="/customer/edit-ticket">
                           <button className="bg-black text-white p-1 rounded">
                             Edit
                           </button>
                         </Link>
-                          <button className="bg-black text-white p-1 rounded">
-                            Delete
-                          </button>
+                        <button className="bg-black text-white p-1 rounded">
+                          Delete
+                        </button>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -105,7 +153,7 @@ const page = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

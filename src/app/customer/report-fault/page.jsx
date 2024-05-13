@@ -1,26 +1,55 @@
 "use client";
 import React from "react";
 import { useState } from "react";
+import { useAuthStore } from "../../../../stores/auth/store";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const page = () => {
+
+  const auth = useAuthStore((state) => state)
+  const router = useRouter()
+
   const [faultName, setFaultName] = useState("");
   const [faultDescription, setFaultDescription] = useState('')
   const [priority, setPriority] = useState('')
   const [deadline, setDeadline] = useState('')
 
-  const handleReportFault = (e) => {
+  const handleReportFault = async (e) => {
     e.preventDefault()
+
+    // Check for empty inputs
+    if(!faultName || !faultDescription || !priority || !deadline){
+      toast.error('Please fill in all fields!')
+    }
+
+    // Grab the current customer id
+    const customer_id = auth.id
 
     const formData = {
       fault_name: faultName,
       status: 'new',
       priority: priority,
       description: faultDescription,
-      deadline: deadline
+      deadline: deadline,
+      customer_id
     }
+
+    const api_call = await axios.post('https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/faults', {
+      ...formData
+    })
+    .then((res) => {
+      if (res.status === 200){
+        toast.success('Fault succesfully submitted!')
+        router.push('/customer/dashboard')
+      }
+
+      // Send help desk email about fault
+    }).catch((err) => {
+      toast.error(err.response?.data?.message)
+    })
   }
-
-
 
   return (
     <>
