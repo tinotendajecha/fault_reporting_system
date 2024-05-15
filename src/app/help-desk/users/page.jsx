@@ -1,7 +1,11 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 
 import { UserIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import UserInfo from '@/components/UserInfo';
+import { toast } from 'react-toastify';
+import ReactLoading from "react-loading";
 
 import {
   Table,
@@ -13,41 +17,45 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const users = [
-  {
-    id: 1,
-    name: "Tinotenda J",
-    expertise: "Software Developer",
-    user_role: "Technician"
-  },
-
-  {
-    id: 2,
-    name: "John Doe",
-    expertise: "Hardware Engineer",
-    user_role: "User"
-  },
-  {
-    id: 3,
-    name: "Jane Doe",
-    expertise: "Help Desk",
-    user_role: "Help Desk"
-  }
-];
+import axios from 'axios';
 
 const page = () => {
+
+  const [users, setUsers] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  
+
+  useEffect(() => {
+    getAllUsers()
+  }, [])
+
+  const getAllUsers = async() => {
+
+    const api_call = axios.get('https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/user')
+                      .then((res) => {
+                        setUsers(res.data)
+                        setIsLoading(false)
+                      }).catch((err) => {
+                        toast.error(err.response?.data?.message)
+                      })
+  }
+
+
+  if (isLoading) {
+    return (
+      <>
+        <div className="flex justify-center items-center min-h-96">
+          <ReactLoading type="spin" color="gray" height={"4%"} width={"4%"} />
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <div className="columns flex ml-10">
         <div className="mt-10 flex items-start justify-between flex-col  pl-1 pr-2  h-56 lg:w-64">
-          <div className="flex items-center ml-2 mt-2 ">
-            <UserIcon className="mr-1.5 h-16 w-16 flex-shrink-0 text-gray-400 border" />
-            <div className="ml-2 ">
-              <h1 className="text-2xl">Joyce</h1>
-              <p>Help desk</p>
-            </div>
-          </div>
+          <UserInfo />
 
           <div className="flex flex-col ml-2 mt-5 ">
             <Link href="/help-desk/faults">
@@ -87,7 +95,7 @@ const page = () => {
                     user Name
                   </TableHead>
                   <TableHead className="text-left w-[200px]">
-                    Expertise
+                    Email
                   </TableHead>
                   <TableHead className="text-left w-[200px]">
                     Role
@@ -103,8 +111,8 @@ const page = () => {
                     <TableCell className="font-medium text-left">
                       {user.name}
                     </TableCell>
-                    <TableCell>{user.expertise}</TableCell>
-                    <TableCell>{user.user_role}</TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.role}</TableCell>
                     <TableCell className="text-left">
                       <div className="flex items-center gap-0.5">
                         <Link href='/help-desk/users/edit-user'>

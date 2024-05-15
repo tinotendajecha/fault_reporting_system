@@ -6,6 +6,7 @@ import { useAuthStore } from "../../../../stores/auth/store";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import ReactLoading from "react-loading";
+import UserInfo from "@/components/UserInfo";
 
 import {
   Table,
@@ -61,13 +62,14 @@ const page = () => {
       {console.log(customerFaults[0])}
       <div className="columns flex ml-10">
         <div className="mt-10 flex items-start justify-between flex-col  pl-1 pr-2 h-48 lg:w-64">
-          <div className="flex items-center ml-2 mt-2 ">
+          <UserInfo />
+          {/* <div className="flex items-center ml-2 mt-2 ">
             <UserIcon className="mr-1.5 h-16 w-16 flex-shrink-0 text-gray-400 border" />
             <div className="ml-2 ">
               <h1 className="text-2xl">{auth.name.split(' ')[0]}</h1>
               <p>{auth.role}</p>
             </div>
-          </div>
+          </div> */}
 
           <div className="flex flex-col ml-2 mt-5 ">
             <Link href="/customer/dashboard">

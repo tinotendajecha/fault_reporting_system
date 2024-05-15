@@ -5,15 +5,17 @@ import { Btn } from "@/components/Btn";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const page = () => {
+
+  const router = useRouter()
 
   // Bind input fields to variables
   const [email, setEmail] = useState('')
   const [fullName, setFullName] = useState('')
   const [password, setPassword] = useState('')
   const [role, setRole] = useState('')
-
   
 
   const handleCreateAccountForUser = (e) => {
@@ -27,11 +29,20 @@ const page = () => {
     }
 
     const formData = {
-      email, fullName, password, role
+      email, name:fullName, password, role
     }
 
     // API call - POST Request
-    console.log(formData)
+    const api_call = axios.post('https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/auth/signup', formData)
+    .then((res) => {
+      console.log(res)
+      if (res.status === 200){
+        toast.success('Account created succesfully!')
+        router.push('/help-desk/users/')
+      }
+    }).catch((err) => {
+      toast.error(err.response?.data?.message)
+    })
   }
   return (
     <>

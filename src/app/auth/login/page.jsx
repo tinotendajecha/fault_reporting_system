@@ -28,7 +28,7 @@ const page = () => {
       }
 
       if (auth.role === 'technician'){
-        redirect('/technician/dashboard/assigned-faults')
+        redirect('/technician/dashboard/assigned-jobs')
       }
 
       if (auth.role === 'customer'){
@@ -125,7 +125,7 @@ const page = () => {
                   autoComplete="current-password"
                   required className='w-full p-1.5 border-solid border-2 rounded-md outline-none'/>
               </div>
-            </div>
+            </div> 
 
             <div>
               <button
