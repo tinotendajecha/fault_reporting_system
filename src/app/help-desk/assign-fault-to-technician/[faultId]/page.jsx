@@ -107,117 +107,82 @@ const page = ({ params }) => {
 
   return (
     <>
+  <div className="bg-white shadow-sm rounded-lg p-6 max-w-2xl mx-auto">
+    <h1 className="text-2xl font-bold mb-4">Fault Details</h1>
+
+    <div className="grid grid-cols-2 gap-6">
       <div>
-        {/* Fault Name */}
-        <div>
-          <label
-            htmlFor="fault"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Fault Name
-          </label>
-          <div className="mt-2">
-            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-              <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
-              <input
-                type="text"
-                name="fault"
-                id="fault"
-                value={retrievedFault.fault_name}
-                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                placeholder="Office wifi not working"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Fault Description */}
-        <div>
-          <label
-            htmlFor="faultDescription"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Fault Description
-          </label>
-          <div className="mt-2">
-            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-              <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
-              <textarea
-                name="faultDescription"
-                id="faultDescription"
-                value={retrievedFault.description}
-                className="block w-96 h-72 mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm"
-              ></textarea>
-            </div>
-          </div>
-        </div>
-
-        {/* Fault Priority */}
-        <div>
-          <label
-            htmlFor="priority"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Priority
-          </label>
-          <input type="text" value={retrievedFault.priority} />
-        </div>
-
-        {/* Deadline */}
-        <div>
-          <label
-            htmlFor="deadline"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Deadline
-          </label>
-
-          <input type="text" value={retrievedFault.deadline} />
-        </div>
-
-        <div>
-          <label
-            htmlFor="jobDescription"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Job Description
-          </label>
-          <textarea
-            name="jobDescription"
-            id="jobDescription"
-            onChange={(e) => setJobDescription(e.target.value)}
-            className="block w-96 h-72 mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="technicianId"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Assign Technician
-          </label>
-          <select
-            name="technicianId"
-            onChange={(e) => setAssignTechnician(e.target.value)}
-            id="technicianId"
-          >
-            <option value="">Please Assign Technician</option>
-            {technicians.map((technician) => (
-              <option key={technician.id} value={technician.id}>
-                {technician.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <button
-        onClick={handleCreateJob}
-        className="bg-black p-1.5 text-white rounded-md mt-2">
-          Create Job
-        </button>
+        <label htmlFor="fault" className="text-gray-700 font-medium">
+          Fault Name
+        </label>
+        <p className="text-gray-900 mt-1">{retrievedFault.fault_name}</p>
       </div>
-    </>
+
+      <div>
+        <label htmlFor="priority" className="text-gray-700 font-medium">
+          Priority
+        </label>
+        <p className="text-gray-900 mt-1">{retrievedFault.priority}</p>
+      </div>
+
+      <div>
+        <label htmlFor="deadline" className="text-gray-700 font-medium">
+          Deadline
+        </label>
+        <p className="text-gray-900 mt-1">{retrievedFault.deadline}</p>
+      </div>
+
+      <div>
+        <label htmlFor="faultDescription" className="text-gray-700 font-medium">
+          Fault Description
+        </label>
+        <p className="text-gray-900 mt-1 whitespace-pre-line">
+          {retrievedFault.description}
+        </p>
+      </div>
+    </div>
+
+    <div className="mt-6">
+      <label htmlFor="jobDescription" className="text-gray-700 font-medium">
+        Job Description
+      </label>
+      <textarea
+        name="jobDescription"
+        id="jobDescription"
+        onChange={(e) => setJobDescription(e.target.value)}
+        className="block w-full h-32 mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm"
+      />
+    </div>
+
+    <div className="mt-6">
+      <label htmlFor="technicianId" className="text-gray-700 font-medium">
+        Assign Technician
+      </label>
+      <select
+        name="technicianId"
+        onChange={(e) => setAssignTechnician(e.target.value)}
+        id="technicianId"
+        className="block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm"
+      >
+        <option value="">Please Assign Technician</option>
+        {technicians.map((technician) => (
+          <option key={technician.id} value={technician.id}>
+            {technician.name}
+          </option>
+        ))}
+      </select>
+    </div>
+
+    <div className="mt-6 flex justify-end">
+      <button
+        onClick={handleCreateJob}
+        className="bg-black p-2 text-white rounded-md hover:bg-gray-800"
+      >
+        Create Job
+      </button>
+    </div>
+  </div>
+</>
   );
 };
 

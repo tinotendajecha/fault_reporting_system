@@ -13,42 +13,81 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-// import { UserIcon } from 'lucide-react';
-import { UserIcon } from "@heroicons/react/20/solid";
-import Link from "next/link";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const my_faults = [
-  {
-    id: 1,
-    description: "Office wifi not working",
-    location: "IT Department",
-    reportedBy: "Jack Ryan",
-    deadline: "01/06/2024",
-    status: "In Progress",
-  },
-  {
-    id: 2,
-    description: "Connection to server not working",
-    location: "IT Department",
-    reportedBy: "Susan kalwoski",
-    deadline: "01/05/2024",
-    status: "In Progress",
-  },
-];
+import ReactLoading from "react-loading";
+import { toast } from "react-toastify";
+
+import Link from "next/link";
+import axios from "axios";
+
+import { useAuthStore } from "../../../../../stores/auth/store";
+
+
 
 const page = () => {
+
+  const auth = useAuthStore((state) => state)
+  const userId = auth.id
+
+  const [retrievedJobs, setRetrievedJobs] = useState([]) // change here
+  const [isLoading, setIsLoading] = useState(true)
+  const [deleteActionNotOccured, setDeleteActionNotOccured] = useState(true)
+
+  useEffect(() => {
+    getAllJobs()  // change here
+  },[])
+
+
+  useEffect(() => {
+
+  }, isLoading)
+
+
+  const getAllJobs = () => { // change here
+    const api_call =axios.get(`https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/getFaultsByTechnicianId?technicianId=${userId}&fault_status=resolved`)
+                    .then((res) => {
+                      setRetrievedJobs(res.data)  // change here
+                      setIsLoading(false) 
+                    }).catch((err) => {
+                      toast.error(err.response?.data?.message)
+                    })
+  }
+
+  const handleDelete = (id) => {
+    const deleteFault = axios.delete(`https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/faults/${id}`).then((res) => {
+      toast.success("Fault deleted successfully")
+      setIsLoading(true)
+      getAllJobs()
+    }).catch((err) => {
+      toast.error(err.response?.data?.message)
+    })
+  }
+
+  if (isLoading && !deleteActionNotOccured) {
+    return (
+      <>
+        <div className="flex justify-center items-center min-h-96">
+          <ReactLoading type="spin" color="gray" height={"4%"} width={"4%"} />
+        </div>
+      </>
+    );
+  }
+
+  // if(!retrievedJobs){
+  //   return(
+  //     <div>
+  //       <h1 className="text-center text-2xl mt-10">No completed jobs yet!</h1>
+  //     </div>
+  //   )
+  // }
+
+
   return (
     <>
       <div className="columns flex ml-10">
         <div className="mt-10 flex items-start justify-between flex-col  pl-1 pr-2 h-48 lg:w-64">
-          {/* <div className="flex items-center ml-2 mt-2 ">
-            <UserIcon className="mr-1.5 h-16 w-16 flex-shrink-0 text-gray-400 border" />
-            <div className="ml-2 ">
-              <h1 className="text-2xl">Peter</h1>
-              <p>Technician</p>
-            </div>
-          </div> */}
-
           <UserInfo />
 
           <div className="flex flex-col ml-2 mt-5 ">
@@ -74,44 +113,49 @@ const page = () => {
           </div>
 
           <div className="mt-4 ">
-            <Table>
-              <TableCaption>List of reported faults</TableCaption>
+          <Table>
+            <TableCaption>List of jobs</TableCaption>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[200px]">Description</TableHead>
-                  <TableHead className="w-[200px]">Location</TableHead>
-                  <TableHead className="w-[200px]">Reported By</TableHead>
+                  <TableHead className="text-left w-[200px]">Date</TableHead>
+                  <TableHead className="text-left w-[200px]">
+                    Job Number
+                  </TableHead>
+                  <TableHead className="text-left w-[200px]">
+                    Job Description
+                  </TableHead>
+                  <TableHead className="text-left w-[200px]">
+                    Customer
+                  </TableHead>
                   <TableHead className="text-left w-[200px]">Status</TableHead>
                   <TableHead className="text-left w-[200px]">
-                    Deadline
+                    Progress Notes
                   </TableHead>
-                  <TableHead className="text-left w-[200px]">Action</TableHead>
+                  <TableHead className="text-left w-[200px]">Deadline</TableHead>
+                  <TableHead className="text-center w-[200px]">
+                    Action
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {my_faults.map((fault) => (
-                  <TableRow key={fault.id}>
+                {retrievedJobs.map((job) => (
+                  <TableRow key={job.id}>
                     <TableCell className="font-medium">
-                      {fault.description}
+                    {new Date(job.created_at).toLocaleDateString()}
                     </TableCell>
-                    <TableCell>{fault.location}</TableCell>
-                    <TableCell>{fault.reportedBy}</TableCell>
-                    <TableCell className="text-left">{fault.status}</TableCell>
-                    <TableCell className="text-left">
-                      {fault.deadline}
+                    <TableCell>{job.id}</TableCell>
+                    <TableCell className="font-medium">
+                      {job.description}
                     </TableCell>
+                    <TableCell>{job._customer_info[0].name}</TableCell>
+                    <TableCell className="text-left">{job.status}</TableCell>
+                    <TableCell className="text-left">{job.progress_notes}</TableCell>
+                    <TableCell className="text-left">{job.deadline}</TableCell>
                     <TableCell className="">
                       <div className="flex gap-0.5">
-                        <Link href="/technician/update-fault">
-                          <button className="bg-black text-white p-1 rounded">
-                            Update Fault
-                          </button>
-                        </Link>
-                        {/* <Link href='/help-desk/faults/delete-fault'>
-                          <button className="bg-black text-white p-1 rounded">
+                          <button onClick={() => handleDelete(job.id)} className="bg-black text-white p-1 rounded">
                             Delete
                           </button>
-                        </Link> */}
                       </div>
                     </TableCell>
                   </TableRow>

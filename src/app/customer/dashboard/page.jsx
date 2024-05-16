@@ -137,11 +137,11 @@ const page = () => {
                     </TableCell>
                     <TableCell className="">
                       <div className="flex gap-0.5">
-                        <Link href="/customer/edit-ticket">
+                        {/* <Link href="/customer/edit-ticket">
                           <button className="bg-black text-white p-1 rounded">
                             Edit
                           </button>
-                        </Link>
+                        </Link> */}
                         <button className="bg-black text-white p-1 rounded">
                           Delete
                         </button>

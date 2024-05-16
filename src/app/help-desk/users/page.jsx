@@ -69,6 +69,10 @@ const page = () => {
             <Link href="/help-desk/users">
               <div className="text-xl p-3 bg-gray-200">Users</div>
             </Link>
+
+            <Link href="/help-desk/jobs/completed-jobs">
+              <div className="text-xl  p-3 w-56">Completed Jobs</div>
+            </Link>
           </div>
         </div>
 
@@ -115,11 +119,11 @@ const page = () => {
                     <TableCell>{user.role}</TableCell>
                     <TableCell className="text-left">
                       <div className="flex items-center gap-0.5">
-                        <Link href='/help-desk/users/edit-user'>
+                        {/* <Link href='/help-desk/users/edit-user'>
                           <button className="bg-black text-white p-1 rounded">
                             Edit
                           </button>
-                        </Link>
+                        </Link> */}
                         <button className="bg-black text-white p-1 rounded">
                           Delete
                         </button>

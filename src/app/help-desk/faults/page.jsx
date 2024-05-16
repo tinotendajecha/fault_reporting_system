@@ -79,7 +79,11 @@ const page = () => {
             </Link>
 
             <Link href="/help-desk/users">
-              <div className="text-xl p-3">users</div>
+              <div className="text-xl p-3">Users</div>
+            </Link>
+
+            <Link href="/help-desk/jobs/completed-jobs">
+              <div className="text-xl  p-3 w-56">Completed Jobs</div>
             </Link>
           </div>
         </div>
