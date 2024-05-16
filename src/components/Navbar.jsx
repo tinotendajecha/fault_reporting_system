@@ -21,8 +21,6 @@ const Navbar = () => {
     // call logout action from store
     logout()
     router.push('/')
-    
-    console.log('After logging out' + auth.id)
   }
 
   return (

@@ -63,14 +63,6 @@ const page = () => {
       <div className="columns flex ml-10">
         <div className="mt-10 flex items-start justify-between flex-col  pl-1 pr-2 h-48 lg:w-64">
           <UserInfo />
-          {/* <div className="flex items-center ml-2 mt-2 ">
-            <UserIcon className="mr-1.5 h-16 w-16 flex-shrink-0 text-gray-400 border" />
-            <div className="ml-2 ">
-              <h1 className="text-2xl">{auth.name.split(' ')[0]}</h1>
-              <p>{auth.role}</p>
-            </div>
-          </div> */}
-
           <div className="flex flex-col ml-2 mt-5 ">
             <Link href="/customer/dashboard">
               <div className="text-xl  p-3 w-56 bg-gray-200">Open Tickets</div>
