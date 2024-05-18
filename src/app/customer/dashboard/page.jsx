@@ -80,7 +80,7 @@ const page = () => {
           <UserInfo />
           <div className="flex flex-col ml-2 mt-5 ">
             <Link href="/customer/dashboard">
-              <div className="text-xl  p-3 w-56 bg-gray-200">Faults</div>
+              <div className="text-xl  p-3 w-56 bg-gray-200">My Faults</div>
             </Link>
 
             {/* <Link href="/customer/closed-tickets">
@@ -90,18 +90,18 @@ const page = () => {
         </div>
 
         <div className="tables_column mt-10 pl-5  ml-2">
-          <div className="flex gap-1 text-white ml-4">
+          {/* <div className="flex gap-1 text-white ml-4">
             <span className="bg-black p-0.5 rounded text-xs">Pending 2</span>
             <span className="bg-black p-0.5 rounded text-xs">
               In Progress 4
             </span>
-          </div>
+          </div> */}
 
           <div className="mt-4 ">
             <div className="flex items-center justify-end mb-2">
               <Link href="/customer/report-fault">
                 {" "}
-                <button className="bg-black p-1.5 rounded-lg text-white">
+                <button className="bg-black p-1.5 rounded-lg text-white mr-28">
                   Report Fault
                 </button>
               </Link>

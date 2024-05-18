@@ -23,11 +23,12 @@ const page = () => {
 
   const [users, setUsers] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [deleteUser, setDeleteUser] = useState(false)
   
 
   useEffect(() => {
     getAllUsers()
-  }, [])
+  }, [deleteUser])
 
   const getAllUsers = async() => {
 
@@ -35,6 +36,18 @@ const page = () => {
                       .then((res) => {
                         setUsers(res.data)
                         setIsLoading(false)
+                      }).catch((err) => {
+                        toast.error(err.response?.data?.message)
+                      })
+  }
+
+  const handleDeleteUser = async (id) => {
+    const api_call = axios.delete(`https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/user/${id}`)
+                      .then((res) => {
+                        if (res.status === 200){
+                          toast.success('User succesfully deleted!')
+                          setDeleteUser(true)
+                        }
                       }).catch((err) => {
                         toast.error(err.response?.data?.message)
                       })
@@ -77,15 +90,15 @@ const page = () => {
         </div>
 
         <div className="tables_column mt-10 pl-5  ml-2">
-          <div className=" flex items-center justify-between">
-            <div className="flex gap-1 text-white ml-4">
+          <div className=" flex items-center justify-end">
+            {/* <div className="flex gap-1 text-white ml-4">
               <span className="bg-black p-0.5 rounded text-xs">Pending 2</span>
               <span className="bg-black p-0.5 rounded text-xs">
                 In Progress 4
               </span>
-            </div>
+            </div> */}
 
-            <div className="mr-16 bg-green-600 text-white p-1.5 rounded">
+            <div className="mr-16 bg-green-600 text-white p-1.5 rounded  ">
              <Link href='/help-desk/users/add-user'> <button>Add User</button></Link>
             </div>
           </div>
@@ -96,7 +109,7 @@ const page = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead className="text-left w-[200px]">
-                    user Name
+                    User Name
                   </TableHead>
                   <TableHead className="text-left w-[200px]">
                     Email
@@ -116,7 +129,7 @@ const page = () => {
                       {user.name}
                     </TableCell>
                     <TableCell>{user.email}</TableCell>
-                    <TableCell>{user.role}</TableCell>
+                    <TableCell>{user.role === 'help_desk' ? 'Help Desk' : user.role.charAt(0).toUpperCase() + user.role.slice(1)}</TableCell>
                     <TableCell className="text-left">
                       <div className="flex items-center gap-0.5">
                         {/* <Link href='/help-desk/users/edit-user'>
@@ -124,7 +137,7 @@ const page = () => {
                             Edit
                           </button>
                         </Link> */}
-                        <button className="bg-black text-white p-1 rounded">
+                        <button onClick={() => handleDeleteUser(user.id)} c className="bg-black text-white p-1 rounded">
                           Delete
                         </button>
                       </div>

@@ -34,7 +34,7 @@ const page = ({ params }) => {
 
   const handleCompleteJob = async () => { 
    const updateData = {
-      technicianNotes: technicianNotes,
+      // technicianNotes: technicianNotes,
       status: "resolved",
       fault_name: retrievedFault.fault_name,
       pritority: retrievedFault.priority,
@@ -42,7 +42,7 @@ const page = ({ params }) => {
       deadline: retrievedFault.deadline,
       customer_id: retrievedFault.customer_id,
       technician_id: retrievedFault.technician_id,
-      progress_notes: retrievedFault.progress_notes
+      progress_notes: technicianNotes
    }
 
    const api_call = axios.patch(`https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/faults/${id}`, updateData)

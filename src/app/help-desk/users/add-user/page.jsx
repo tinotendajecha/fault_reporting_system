@@ -46,12 +46,12 @@ const page = () => {
   }
   return (
     <>
-      <form>
+      <form className="bg-white p-6 rounded-lg shadow-sm">
         <div>
-          <h1>Add User</h1>
+          <h1 className="text-2xl font-bold mb-4">Add User</h1>
         </div>
-
-        <div>
+  
+        <div className="mb-4">
           <label
             htmlFor="email"
             className="block text-sm font-medium leading-6 text-gray-900"
@@ -65,15 +65,15 @@ const page = () => {
                 type="email"
                 name="email"
                 id="email"
-                onChange={(e) => {setEmail(e.target.value)}}
+                onChange={(e) => setEmail(e.target.value)}
                 className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                 placeholder="johndoe@gmail.com"
               />
             </div>
           </div>
         </div>
-
-        <div>
+  
+        <div className="mb-4">
           <label
             htmlFor="name"
             className="block text-sm font-medium leading-6 text-gray-900"
@@ -89,15 +89,15 @@ const page = () => {
                 id="name"
                 autoComplete="name"
                 required
-                onChange={(e) => {setFullName(e.target.value)}}
+                onChange={(e) => setFullName(e.target.value)}
                 className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                 placeholder="John Doe"
               />
             </div>
           </div>
         </div>
-
-        <div>
+  
+        <div className="mb-4">
           <label
             htmlFor="password"
             className="block text-sm font-medium leading-6 text-gray-900"
@@ -113,33 +113,41 @@ const page = () => {
                 id="password"
                 placeholder="Assign default password for user"
                 autoComplete="password"
-                onChange={(e) => {setPassword(e.target.value)}}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
         </div>
-
-        <div>
+  
+        <div className="mb-4">
           <label
             htmlFor="role"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
             Role and Permissions
           </label>
-          <select name="role" id="role" onChange={(e) => {setRole(e.target.value)}}>
+          <select
+            name="role"
+            id="role"
+            onChange={(e) => setRole(e.target.value)}
+            className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          >
             <option value="">Assign role</option>
             <option value="help_desk">Help Desk Agent</option>
             <option value="technician">Technician</option>
             <option value="customer">Customer</option>
           </select>
         </div>
-
+  
         <div>
-          <button className="bg-black text-white p-1.5 rounded-lg mt-2"
-          onClick={handleCreateAccountForUser}
-          >Create Account</button>
+          <button
+            className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+            onClick={handleCreateAccountForUser}
+          >
+            Create Account
+          </button>
         </div>
       </form>
     </>

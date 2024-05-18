@@ -122,7 +122,7 @@ const page = () => {
                     </TableCell>
                     <TableCell>{job.id}</TableCell>
                     <TableCell className="font-medium">
-                      {job.description}
+                      {job._jobs_of_faults.job_description}
                     </TableCell>
                     <TableCell>{job._customer_info[0].name}</TableCell>
                     <TableCell className="text-left">{job.status}</TableCell>

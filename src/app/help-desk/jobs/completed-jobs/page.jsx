@@ -24,9 +24,11 @@ const page = () => {
   const [retrievedJobs, setRetrievedJobs] = useState(""); // change here
   const [isLoading, setIsLoading] = useState(true);
 
+  const [deleteJob, setDeleteJob] = useState(false)
+
   useEffect(() => {
     getAllJobs(); // change here
-  }, []);
+  }, [deleteJob]);
 
   const getAllJobs = () => {
     // change here
@@ -42,6 +44,23 @@ const page = () => {
         toast.error(err.response?.data?.message);
       });
   };
+
+  const handleDeleteJob = async (id) => { 
+
+      const api_call = axios.delete(`https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/faults/${id}`).then(
+        (res) => {
+          if(res.status === 200){
+            toast.success("Job deleted successfully")
+            setDeleteJob(true)
+          }
+        }
+      ).catch(
+        (err) => {
+          toast.error(err.response?.data?.message)
+        }
+      )
+
+  }
 
   if (isLoading) {
     return (
@@ -80,18 +99,18 @@ const page = () => {
 
         <div className="tables_column mt-10 pl-5  ml-2">
           <div className=" flex items-center justify-between">
-            <div className="flex gap-1 text-white ml-4">
+            {/* <div className="flex gap-1 text-white ml-4">
               <span className="bg-black p-0.5 rounded text-xs">Pending 2</span>
               <span className="bg-black p-0.5 rounded text-xs">
                 In Progress 4
               </span>
-            </div>
+            </div> */}
 
-            <div className="mr-16 bg-green-600 text-white p-1.5 rounded">
+            {/* <div className="mr-16 bg-green-600 text-white p-1.5 rounded">
               <Link href="/help-desk/jobs/add-job">
                 <button>Add Job</button>
-              </Link>
-            </div>
+               </Link>
+            </div> */}
           </div>
 
           <div className="mt-4 ">
@@ -144,7 +163,7 @@ const page = () => {
                             Edit
                           </button>
                         </Link> */}
-                        <button className="bg-black text-white p-1 rounded">
+                        <button onClick={() => handleDeleteJob(job.id)} className="bg-black text-white p-1 rounded">
                           Delete
                         </button>
                       </div>

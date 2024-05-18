@@ -11,10 +11,10 @@ const Navbar = () => {
   const auth = useAuthStore((state) => state) 
   const logout = useAuthStore((state) => state.logout) 
 
-  // const [loggedOut, setIsLoggedOut] = useState(true)
+
 
   useEffect(() => {
-    console.log('state changed' + auth.name)
+
   }, [auth.name])
 
   const router = useRouter()
@@ -24,13 +24,11 @@ const Navbar = () => {
     
     // call logout action from store
     logout()
-    // setIsLoggedOut(false)
     router.push('/')
   }
 
   return (
     <div className='flex ml-10 items-center justify-between mt-10 mr-20 '>
-      {console.log('Navbar' + auth.name)}
       
         <h1 className='text-3xl'>Fault Reporting System</h1>
 
