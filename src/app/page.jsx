@@ -1,5 +1,7 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
+import { useAuthStore } from '../../stores/auth/store';
 
 import { PiNumberSquareOneFill,
    PiNumberSquareTwoFill, 
@@ -8,8 +10,11 @@ import { PiNumberSquareOneFill,
   PiNumberSquareFiveFill  } from "react-icons/pi";
 
 export default function Home() {
+  const auth = useAuthStore((state) => state) 
+
   return (
     <div className="ml-20 mr-28 mt-36">
+      {console.log('Landing page' + auth.name)}
         <h1 className="text-5xl ">The easiest way to report and track faults in your organization.</h1>
 
         <div className="mt-10 ml-5">

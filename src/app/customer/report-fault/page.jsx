@@ -53,67 +53,76 @@ const page = () => {
 
   return (
     <>
-      <form action="">
+      <form action="" className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md mx-auto">
         <div>
-          <h1>Report Fault</h1>
+          <h1 className="text-2xl font-bold mb-4">Report Fault</h1>
         </div>
-
+  
         {/* Fault Name */}
-        <div>
+        <div className="mb-4">
           <label
             htmlFor="fault"
-            className="block text-sm font-medium leading-6 text-gray-900"
+            className="block text-gray-700 font-bold mb-2"
           >
             Fault Name
           </label>
-          <div className="mt-2">
-            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-              <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
-              <input
-                type="text"
-                name="fault"
-                id="fault"
-                onChange={(e) => {
-                  setFaultName(e.target.value);
-                }}
-                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                placeholder="Office wifi not working"
-              />
-            </div>
+          <div className="flex rounded-md shadow-sm">
+            <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+              
+            </span>
+            <input
+              type="text"
+              name="fault"
+              id="fault"
+              onChange={(e) => {
+                setFaultName(e.target.value);
+              }}
+              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-r-md placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="Office wifi not working"
+            />
           </div>
         </div>
-
+  
         {/* Fault Description */}
-        <div>
+        <div className="mb-4">
           <label
             htmlFor="faultDescription"
-            className="block text-sm font-medium leading-6 text-gray-900"
+            className="block text-gray-700 font-bold mb-2"
           >
             Fault Description
           </label>
-          <div className="mt-2">
-            <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-              <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
-              <textarea 
-                name="faultDescription"
-                id="faultDescription"
-                onChange={(e) => {
-                  setFaultDescription(e.target.value);
-                }}>
-                </textarea>
-            </div>
+          <div className="flex rounded-md shadow-sm">
+            <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+              
+            </span>
+            <textarea
+              name="faultDescription"
+              id="faultDescription"
+              onChange={(e) => {
+                setFaultDescription(e.target.value);
+              }}
+              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-r-md placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+            </textarea>
           </div>
         </div>
-
+  
         {/* Fault Priority */}
-        <div>
+        <div className="mb-4">
           <label
             htmlFor="priority"
-            className="block text-sm font-medium leading-6 text-gray-900"
+            className="block text-gray-700 font-bold mb-2"
           >
             Priority
           </label>
-          <select name="priority" id="priority" onChange={(e) => {setPriority(e.target.value)}}>
+          <select
+            name="priority"
+            id="priority"
+            onChange={(e) => {
+              setPriority(e.target.value);
+            }}
+            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          >
             <option value="">Select Priority Level</option>
             <option value="low">Low</option>
             <option value="mid">Mid</option>
@@ -121,26 +130,34 @@ const page = () => {
             <option value="very urgent">Urgent</option>
           </select>
         </div>
-
+  
         {/* Deadline */}
-        <div>
-        <label
+        <div className="mb-4">
+          <label
             htmlFor="deadline"
-            className="block text-sm font-medium leading-6 text-gray-900"
+            className="block text-gray-700 font-bold mb-2"
           >
             Deadline
           </label>
-
           <div>
-            <input 
-              id= 'deadline'
-              name='deadline'
-              className=""
-              type="date" onChange={(e) => {setDeadline(e.target.value)}}/>
+            <input
+              id="deadline"
+              name="deadline"
+              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              type="date"
+              onChange={(e) => {
+                setDeadline(e.target.value);
+              }}
+            />
           </div>
         </div>
-
-        <button onClick={handleReportFault} className="bg-black text-white p-1.5 mt-2 rounded-lg">Report Fault</button>
+  
+        <button
+          onClick={handleReportFault}
+          className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+        >
+          Report Fault
+        </button>
       </form>
     </>
   );

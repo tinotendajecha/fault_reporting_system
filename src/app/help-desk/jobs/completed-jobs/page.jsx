@@ -6,6 +6,7 @@ import Link from "next/link";
 import UserInfo from "@/components/UserInfo";
 
 import ReactLoading from "react-loading";
+import { toast } from "react-toastify";
 
 import {
   Table,

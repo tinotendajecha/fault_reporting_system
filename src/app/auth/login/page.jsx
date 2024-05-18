@@ -14,6 +14,7 @@ const page = () => {
   const auth = useAuthStore((state) => state)
   const login = useAuthStore((state) => state.login)
 
+
   useEffect(() => {
     if (auth.name) {
       let name = auth.name

@@ -24,7 +24,9 @@
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "zustand": "^4.5.2"
+    "zukeeper": "^1.0.2",
+    "zustand": "^4.5.2",
+    "zustand-persist": "^0.4.0"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",

@@ -62,6 +62,7 @@ const page = () => {
 
   return (
     <>
+    {console.log(retrievedJobs)}
       <div className="columns flex ml-10">
         <div className="mt-10 flex items-start justify-between flex-col  pl-1 pr-2 h-48 lg:w-64">
           <UserInfo />

@@ -24,10 +24,13 @@ const page = () => {
   const auth = useAuthStore((state) => state);
   const [customerFaults, setCustomerFaults] = useState([]);
   const [isloading, setIsLoading] = useState(true);
+  const [deleteFault, setDeleteFault] = useState(false);
 
   useEffect(() => {
     getAllCustomerFaults();
-  }, []);
+  }, [deleteFault]);
+
+
 
   const getAllCustomerFaults = async (e) => {
     const customer_id = auth.id;
@@ -47,6 +50,18 @@ const page = () => {
       });
   };
 
+  const handleDeleteFault = async (id) => {
+    const api_call = await axios.delete(`https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/faults/${id}`)
+              .then((res) => {
+                if (res.status === 200){
+                  toast.success('Fault succesfully deleted!')
+                  setDeleteFault(true)
+                }
+              }).catch((err) => {
+                toast.error(err.response?.data?.message)
+              })
+  }
+
   if (isloading) {
     return (
       <>
@@ -65,12 +80,12 @@ const page = () => {
           <UserInfo />
           <div className="flex flex-col ml-2 mt-5 ">
             <Link href="/customer/dashboard">
-              <div className="text-xl  p-3 w-56 bg-gray-200">Open Tickets</div>
+              <div className="text-xl  p-3 w-56 bg-gray-200">Faults</div>
             </Link>
 
-            <Link href="/customer/closed-tickets">
+            {/* <Link href="/customer/closed-tickets">
               <div className="text-xl p-3">Ticket History</div>
-            </Link>
+            </Link> */}
           </div>
         </div>
 
@@ -134,7 +149,9 @@ const page = () => {
                             Edit
                           </button>
                         </Link> */}
-                        <button className="bg-black text-white p-1 rounded">
+                        <button onClick={() => {
+                          handleDeleteFault(fault.id)
+                        }} className="bg-black text-white p-1 rounded">
                           Delete
                         </button>
                       </div>
