@@ -3,7 +3,8 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from 'zustand/middleware'
 
 
-const auth = localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : null
+// const auth = localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : null
+const auth = {}
 
 
 
