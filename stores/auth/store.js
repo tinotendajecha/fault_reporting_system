@@ -1,14 +1,11 @@
+'use client'
 import { create } from "zustand";
 import { persist, createJSONStorage } from 'zustand/middleware'
 
 
+const auth = localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : null
 
 
-
-if (typeof window !== 'undefined') {
-    // Code that uses localStorage
-    const auth = localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : null
-  }
 
 let initialAuthStore = {
     ...auth
