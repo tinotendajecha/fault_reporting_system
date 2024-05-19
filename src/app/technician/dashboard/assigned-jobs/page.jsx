@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import axios from "axios";
-import { useAuthStore } from "../../../../../stores/auth/store";
+import { useAuthStore } from "../../../stores/auth/store";
 
 // import { UserIcon } from 'lucide-react';
 import { UserIcon } from "@heroicons/react/20/solid";

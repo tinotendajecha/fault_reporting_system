@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { UserIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
-import { useAuthStore } from "../../../../stores/auth/store";
+import { useAuthStore } from "../../stores/auth/store";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import ReactLoading from "react-loading";

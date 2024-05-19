@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Btn } from './Btn';
 import Link from 'next/link';
-import { useAuthStore } from '../../stores/auth/store';
+import { useAuthStore } from '../app/stores/auth/store';
 import { useRouter } from 'next/navigation';
 
 

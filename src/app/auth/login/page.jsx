@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { useAuthStore } from '../../../../stores/auth/store';
+import { useAuthStore } from '../../stores/auth/store';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 

@@ -22,7 +22,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import axios from "axios";
 
-import { useAuthStore } from "../../../../../stores/auth/store";
+import { useAuthStore } from "../../../stores/auth/store";
 
 
 

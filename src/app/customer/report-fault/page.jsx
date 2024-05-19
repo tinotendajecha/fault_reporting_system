@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import { useAuthStore } from "../../../../stores/auth/store";
+import { useAuthStore } from "../../stores/auth/store";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";

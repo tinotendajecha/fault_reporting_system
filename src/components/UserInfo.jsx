@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuthStore } from '../../stores/auth/store';
+import { useAuthStore } from '../app/stores/auth/store';
 import { UserIcon } from "@heroicons/react/20/solid";
 
 const UserInfo = () => {
