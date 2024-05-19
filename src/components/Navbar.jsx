@@ -38,6 +38,7 @@ const Navbar = () => {
           {/* {!auth.name ? <Link href='/request-account'><Btn button_name='Request For Account From Help Desk'></Btn></Link> : null} */}
           {/* Make Logout button */}
           {auth.name ? <button className='bg-black text-white p-2 rounded-md' onClick={handleLogout}>Logout</button> : null}
+          {auth.name ? <Link href='/update-profile'><button className='bg-black text-white p-2 rounded-md ml-5'>Update Profile</button></Link> : null}
           {/* Will add logout button here as well */}
         </div>
     </div>

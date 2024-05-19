@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import ReactLoading from "react-loading";
 import UserInfo from "@/components/UserInfo";
 
+
 import {
   Table,
   TableBody,
@@ -19,12 +20,25 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import axios from "axios";
+import { useLayoutEffect } from "react";
+import { redirect } from "next/navigation";
 
 const page = () => {
   const auth = useAuthStore((state) => state);
   const [customerFaults, setCustomerFaults] = useState([]);
   const [isloading, setIsLoading] = useState(true);
   const [deleteFault, setDeleteFault] = useState(false);
+
+  
+  // // Protect routes
+  // useLayoutEffect(() => {
+  //   // Check if user is logged in as customer through auth.role
+
+  //   if(auth.role !== 'customer'){
+  //     toast.error('Please login as customer')
+  //     redirect('/')
+  //   }
+  // }, [])
 
   useEffect(() => {
     getAllCustomerFaults();
