@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <div className='flex ml-10 items-center justify-between mt-10 mr-20 '>
       
-        <h1 className='text-3xl'>Fault Reporting System</h1>
+        <h1 className='text-4xl'>Fault and Job Management System</h1>
 
         {/* Buttons will render depending on user login status */}
         <div className='flex gap-5'>

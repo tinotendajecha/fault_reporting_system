@@ -105,12 +105,12 @@ const page = () => {
         </div>
 
         <div className="tables_column mt-10 pl-5  ml-2">
-          <div className="flex gap-1 text-white ml-4">
+          {/* <div className="flex gap-1 text-white ml-4">
             <span className="bg-black p-0.5 rounded text-xs">Pending 2</span>
             <span className="bg-black p-0.5 rounded text-xs">
               In Progress 4
             </span>
-          </div>
+          </div> */}
 
           <div className="mt-4 ">
           <Table>

@@ -59,13 +59,6 @@ const page = () => {
     <>
       <div className="columns flex ml-10">
         <div className="mt-10 flex items-start justify-between flex-col  pl-1 pr-2 h-56 lg:w-64">
-          {/* <div className="flex items-center ml-2 mt-2 ">
-            <UserIcon className="mr-1.5 h-16 w-16 flex-shrink-0 text-gray-400 border" />
-            <div className="ml-2 ">
-              <h1 className="text-2xl">Joyce</h1>
-              <p>Help desk</p>
-            </div>
-          </div> */}
           <UserInfo />
 
 
@@ -75,7 +68,7 @@ const page = () => {
             </Link>
 
             <Link href="/help-desk/jobs">
-              <div className="text-xl p-3 w-56">Jobs</div>
+              <div className="text-xl p-3 w-56">Pending Jobs</div>
             </Link>
 
             <Link href="/help-desk/users">

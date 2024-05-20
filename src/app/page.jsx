@@ -15,8 +15,6 @@ export default function Home() {
   return (
     <div className="ml-20 mr-28 mt-36">
       {console.log('Landing page' + auth.name)}
-        <h1 className="text-5xl ">The easiest way to report and track faults in your organization.</h1>
-
         <div className="mt-10 ml-5">
           <ul>
             <li className="flex items-center gap-2 mb-5">

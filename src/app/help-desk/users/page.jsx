@@ -76,7 +76,7 @@ const page = () => {
             </Link>
 
             <Link href="/help-desk/jobs">
-              <div className="text-xl p-3 w-56 ">Jobs</div>
+              <div className="text-xl p-3 w-56 ">Pending Jobs</div>
             </Link>
 
             <Link href="/help-desk/users">

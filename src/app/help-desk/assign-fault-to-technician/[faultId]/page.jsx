@@ -56,6 +56,16 @@ const page = ({ params }) => {
     // 1. Create a job endpoint
     // 2. Update status and write progress notes
 
+    if(!assignedTechnicianid){
+      toast.error('Please assign technician!')
+      return
+    }
+
+    if(!jobDescription){
+      toast.error('Please enter job description!')
+      return
+    }
+
     // Get form data
     const formData = {
       faults_id : id,

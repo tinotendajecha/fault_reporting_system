@@ -57,6 +57,7 @@ const page = () => {
 
   return (
     <>
+    {console.log(retrievedJobs)}
       <div className="columns flex ml-10">
         <div className="mt-10 flex items-start justify-between flex-col  pl-1 pr-2  h-56 lg:w-64">
           <UserInfo />
@@ -67,7 +68,7 @@ const page = () => {
             </Link>
 
             <Link href="/help-desk/jobs">
-              <div className="text-xl p-3 w-56 bg-gray-200">Jobs</div>
+              <div className="text-xl p-3 w-56 bg-gray-200">Pending Jobs</div>
             </Link>
 
             <Link href="/help-desk/users">
@@ -122,7 +123,7 @@ const page = () => {
                       {job.description}
                     </TableCell>
                     <TableCell className="text-left">{job._customer_info[0].name}</TableCell>
-                    <TableCell className="text-left">{job.status}</TableCell>
+                    <TableCell className="text-left">Pending</TableCell>
                     <TableCell className="text-left">{job.__technician_info[0].name}</TableCell>
                     <TableCell className="text-left">
                       {job.progress_notes}
