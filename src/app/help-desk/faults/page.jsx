@@ -82,12 +82,6 @@ const page = () => {
         </div>
 
         <div className="tables_column mt-10 pl-5  ml-2">
-          <div className="flex gap-1 text-white ml-4">
-            <span className="bg-black p-0.5 rounded text-xs">Pending 2</span>
-            <span className="bg-black p-0.5 rounded text-xs">
-              In Progress 4
-            </span>
-          </div>
 
           <div className="mt-4 ">
             <Table>
@@ -121,11 +115,7 @@ const page = () => {
                             Assign Job
                           </button>
                         </Link>
-                        <Link href='/help-desk/faults/delete-fault'>
-                          <button className="bg-black text-white p-1 rounded">
-                            Delete
-                          </button>
-                        </Link>
+            
                       </div>
                     </TableCell>
                   </TableRow>

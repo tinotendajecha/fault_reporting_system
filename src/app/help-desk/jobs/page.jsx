@@ -20,15 +20,30 @@ import {
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
-
 const page = () => {
   const [retrievedJobs, setRetrievedJobs] = useState(""); // change here
   const [isLoading, setIsLoading] = useState(true);
 
+  const [isDeleted, setIsDeleted] = useState(false)
+
+
+
+
+  const handleDeleteJob = (faults_id) => {
+    const api_call = axios.delete(`https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/faults/${faults_id}`).then((res) => {
+      if (res.status === 200){
+        setIsDeleted(true)
+        toast.success('Deleted Job!')
+      }
+    }).catch((err) => {
+      toast.error(err.response?.data?.message);
+    })
+  }
+
   useEffect(() => {
     getAllJobs(); // change here
-  }, []);
+    setIsDeleted(false)
+  }, [isDeleted]);
 
   const getAllJobs = () => {
     // change here
@@ -57,7 +72,7 @@ const page = () => {
 
   return (
     <>
-    {console.log(retrievedJobs)}
+      {console.log(retrievedJobs)}
       <div className="columns flex ml-10">
         <div className="mt-10 flex items-start justify-between flex-col  pl-1 pr-2  h-56 lg:w-64">
           <UserInfo />
@@ -82,15 +97,13 @@ const page = () => {
         </div>
 
         <div className="tables_column mt-10 pl-5  ml-2">
-          {/* <div className=" flex items-center justify-between">
-            <div className="flex gap-1 text-white ml-4">
-              <span className="bg-black p-0.5 rounded text-xs">Pending 2</span>
-              <span className="bg-black p-0.5 rounded text-xs">
-                In Progress 4
-              </span>
-            </div>
-          </div> */}
-
+          <div className="flex justify-end">
+            <Link href="/help-desk/jobs/add-job">
+              <button className="bg-green-600 p-1.5 rounded-md text-white mr-10">
+                Create Job
+              </button>
+            </Link>
+          </div>
           <div className="mt-4 ">
             <Table>
               <TableCaption>List of jobs</TableCaption>
@@ -104,7 +117,9 @@ const page = () => {
                     Customer
                   </TableHead>
                   <TableHead className="text-left w-[200px]">Status</TableHead>
-                  <TableHead className="text-left w-[200px]">Technician Name</TableHead>
+                  <TableHead className="text-left w-[200px]">
+                    Technician Name
+                  </TableHead>
                   <TableHead className="text-left w-[200px]">
                     Progress Notes
                   </TableHead>
@@ -122,9 +137,13 @@ const page = () => {
                     <TableCell className="font-medium  text-left">
                       {job.description}
                     </TableCell>
-                    <TableCell className="text-left">{job._customer_info[0].name}</TableCell>
+                    <TableCell className="text-left">
+                      {job._customer_info[0].name}
+                    </TableCell>
                     <TableCell className="text-left">Pending</TableCell>
-                    <TableCell className="text-left">{job.__technician_info[0].name}</TableCell>
+                    <TableCell className="text-left">
+                      {job.__technician_info[0].name}
+                    </TableCell>
                     <TableCell className="text-left">
                       {job.progress_notes}
                     </TableCell>
@@ -135,7 +154,7 @@ const page = () => {
                             Edit
                           </button>
                         </Link> */}
-                        <button className="bg-black text-white p-1 rounded">
+                        <button onClick={() => handleDeleteJob(job.id)} className="bg-black text-white p-1 rounded">
                           Delete
                         </button>
                       </div>

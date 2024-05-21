@@ -116,7 +116,7 @@ const page = () => {
                     </TableCell>
                     <TableCell>{job.id}</TableCell>
                     <TableCell className="font-medium">
-                      {job._jobs_of_faults.job_description}
+                    {job._jobs_of_faults && job._jobs_of_faults.job_description ? job._jobs_of_faults.job_description : job.description}
                     </TableCell>
                     <TableCell>{job._customer_info[0].name}</TableCell>
                     <TableCell className="text-left">{job.status}</TableCell>

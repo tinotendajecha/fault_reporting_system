@@ -28,6 +28,7 @@ const page = () => {
 
   useEffect(() => {
     getAllJobs(); // change here
+    setDeleteJob(false)
   }, [deleteJob]);
 
   const getAllJobs = () => {
@@ -98,20 +99,7 @@ const page = () => {
         </div>
 
         <div className="tables_column mt-10 pl-5  ml-2">
-          <div className=" flex items-center justify-between">
-            {/* <div className="flex gap-1 text-white ml-4">
-              <span className="bg-black p-0.5 rounded text-xs">Pending 2</span>
-              <span className="bg-black p-0.5 rounded text-xs">
-                In Progress 4
-              </span>
-            </div> */}
-
-            {/* <div className="mr-16 bg-green-600 text-white p-1.5 rounded">
-              <Link href="/help-desk/jobs/add-job">
-                <button>Add Job</button>
-               </Link>
-            </div> */}
-          </div>
+          
 
           <div className="mt-4 ">
             <Table>
