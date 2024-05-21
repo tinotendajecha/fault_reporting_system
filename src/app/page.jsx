@@ -13,7 +13,7 @@ export default function Home() {
   const auth = useAuthStore((state) => state) 
 
   return (
-    <div className="ml-20 mr-28 mt-36">
+    <div className="ml-20 mr-28 mt-36 landing-page">
       {console.log('Landing page' + auth.name)}
         <div className="mt-10 ml-5">
           <ul>
