@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <div className='flex pl-10 items-center justify-between pt-4 pb-4 pr-20 nav-bar text-white'>
       
-        <h1 className='text-4xl'>Fault and Job Management System</h1>
+        <h1 className='text-4xl'>Fault Reporting System</h1>
 
         {/* Buttons will render depending on user login status */}
         <div className='flex gap-5'>

@@ -24,25 +24,27 @@ const page = () => {
   const [retrievedJobs, setRetrievedJobs] = useState(""); // change here
   const [isLoading, setIsLoading] = useState(true);
 
-  const [isDeleted, setIsDeleted] = useState(false)
-
-
-
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const handleDeleteJob = (faults_id) => {
-    const api_call = axios.delete(`https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/faults/${faults_id}`).then((res) => {
-      if (res.status === 200){
-        setIsDeleted(true)
-        toast.success('Deleted Job!')
-      }
-    }).catch((err) => {
-      toast.error(err.response?.data?.message);
-    })
-  }
+    const api_call = axios
+      .delete(
+        `https://x8ki-letl-twmt.n7.xano.io/api:hY2SbI8j/faults/${faults_id}`
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          setIsDeleted(true);
+          toast.success("Deleted Job!");
+        }
+      })
+      .catch((err) => {
+        toast.error(err.response?.data?.message);
+      });
+  };
 
   useEffect(() => {
     getAllJobs(); // change here
-    setIsDeleted(false)
+    setIsDeleted(false);
   }, [isDeleted]);
 
   const getAllJobs = () => {
@@ -72,7 +74,6 @@ const page = () => {
 
   return (
     <>
-      {console.log(retrievedJobs)}
       <div className="columns flex ml-10">
         <div className="mt-10 flex items-start justify-between flex-col  pl-1 pr-2  h-56 lg:w-64">
           <UserInfo />
@@ -129,38 +130,53 @@ const page = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {retrievedJobs.map((job) => (
-                  <TableRow key={job.id}>
-                    <TableCell className="font-medium text-left">
-                      {new Date(job.created_at).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell className="font-medium  text-left">
-                      {job.description}
-                    </TableCell>
-                    <TableCell className="text-left">
-                      {job._customer_info[0].name}
-                    </TableCell>
-                    <TableCell className="text-left">Pending</TableCell>
-                    <TableCell className="text-left">
-                      {job.__technician_info[0].name}
-                    </TableCell>
-                    <TableCell className="text-left">
-                      {job.progress_notes}
-                    </TableCell>
-                    <TableCell className="text-center">
-                      <div className="flex gap-0.5">
-                        {/* <Link href="/help-desk/jobs/edit-job">
-                          <button className="bg-black text-white p-1 rounded">
-                            Edit
+                {retrievedJobs.length > 0 ? (
+                  retrievedJobs.map((job) => (
+                    <TableRow key={job.id}>
+                      <TableCell className="font-medium text-left">
+                        {new Date(job.created_at).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell className="font-medium  text-left">
+                        {job.description}
+                      </TableCell>
+                      <TableCell className="text-left">
+                        {job._customer_info.length > 0
+                          ? job._customer_info[0].name
+                          : "N/A"}
+                      </TableCell>
+                      <TableCell className="text-left">Pending</TableCell>
+                      <TableCell className="text-left">
+                        {job.__technician_info.length > 0
+                          ? job.__technician_info[0].name
+                          : "N/A"}
+                      </TableCell>
+                      <TableCell className="text-left">
+                        {job.progress_notes}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex gap-0.5">
+                          {/* <Link href="/help-desk/jobs/edit-job">
+              <button className="bg-black text-white p-1 rounded">
+                Edit
+              </button>
+            </Link> */}
+                          <button
+                            onClick={() => handleDeleteJob(job.id)}
+                            className="bg-black text-white p-1 rounded"
+                          >
+                            Delete
                           </button>
-                        </Link> */}
-                        <button onClick={() => handleDeleteJob(job.id)} className="bg-black text-white p-1 rounded">
-                          Delete
-                        </button>
-                      </div>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={7} className="text-center py-4">
+                      No jobs found.
                     </TableCell>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
           </div>

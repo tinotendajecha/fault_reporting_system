@@ -126,39 +126,50 @@ const page = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {retrievedJobs.map((job) => (
-                  <TableRow key={job.id}>
-                    <TableCell className="font-medium text-left">
-                      {new Date(job.created_at).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell className="font-medium  text-left">
-                      {job.description}
-                    </TableCell>
-                    <TableCell className="text-left">
-                      {job._customer_info[0].name}
-                    </TableCell>
-                    <TableCell className="text-left">{job.status}</TableCell>
-                    <TableCell className="text-left">
-                      {job.__technician_info[0].name}
-                    </TableCell>
-                    <TableCell className="text-left">
-                      {job.progress_notes}
-                    </TableCell>
-                    <TableCell className="text-center">
-                      <div className="flex gap-0.5">
-                        {/* <Link href="/help-desk/jobs/edit-job">
-                          <button className="bg-black text-white p-1 rounded">
-                            Edit
-                          </button>
-                        </Link> */}
-                        <button onClick={() => handleDeleteJob(job.id)} className="bg-black text-white p-1 rounded">
-                          Delete
-                        </button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
+  {retrievedJobs.length > 0 ? (
+    retrievedJobs.map((job) => (
+      <TableRow key={job.id}>
+        <TableCell className="font-medium text-left">
+          {new Date(job.created_at).toLocaleDateString()}
+        </TableCell>
+        <TableCell className="font-medium  text-left">
+          {job.description}
+        </TableCell>
+        <TableCell className="text-left">
+          {job._customer_info.length > 0 ? job._customer_info[0].name : 'N/A'}
+        </TableCell>
+        <TableCell className="text-left">{job.status}</TableCell>
+        <TableCell className="text-left">
+          {job.__technician_info.length > 0 ? job.__technician_info[0].name : 'N/A'}
+        </TableCell>
+        <TableCell className="text-left">
+          {job.progress_notes}
+        </TableCell>
+        <TableCell className="text-center">
+          <div className="flex gap-0.5">
+            {/* <Link href="/help-desk/jobs/edit-job">
+              <button className="bg-black text-white p-1 rounded">
+                Edit
+              </button>
+            </Link> */}
+            <button
+              onClick={() => handleDeleteJob(job.id)}
+              className="bg-black text-white p-1 rounded"
+            >
+              Delete
+            </button>
+          </div>
+        </TableCell>
+      </TableRow>
+    ))
+  ) : (
+    <TableRow>
+      <TableCell colSpan={7} className="text-center py-4">
+        No jobs found.
+      </TableCell>
+    </TableRow>
+  )}
+</TableBody>
             </Table>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { useAuthStore } from "../../stores/auth/store";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Image from 'next/image'
 
 const page = () => {
   const auth = useAuthStore((state) => state);
@@ -68,19 +69,6 @@ const page = () => {
             Fault Name
           </label>
           <div className="flex rounded-md shadow-sm">
-            {/* <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-              
-            </span>
-            <input
-              type="text"
-              name="fault"
-              id="fault"
-              onChange={(e) => {
-                setFaultName(e.target.value);
-              }}
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-r-md placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Office wifi not working"
-            /> */}
             <select
               name="fault"
               id="fault"
@@ -90,13 +78,13 @@ const page = () => {
               className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
               <option value="">Select Fault Type</option>
-              <option value="Generator Fault">Generator Fault</option>
-              <option value="Solar Fault">Solar Fault</option>
-              <option value="UPS Fault">UPS Fault</option>
-              <option value="Access Control Fault">Access Control Fault</option>
-              <option value="Elecrical Fault">Elecrical Fault</option>
-              <option value="Aircon Fault">Aircon Fault</option>
-              <option value="BMS Fault">BMS Fault</option>
+              <option value="Billing or payment issues">Billing or payment issues</option>
+              <option value="Solar Fault">Delayed response to customer inquiries</option>
+              <option value="Damaged Ethernet cables">Damaged Ethernet cables</option>
+              <option value="Incorrect cable installation">Incorrect cable installation</option>
+              <option value="Interference or crosstalk between cables">Interference or crosstalk between cables</option>
+              <option value="Difficulty navigating the company's support channels">Difficulty navigating the company's support channels</option>
+              <option value="Slow internet speeds or connection drops">Slow internet speeds or connection drops</option>
             </select>
           </div>
         </div>
